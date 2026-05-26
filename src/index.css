@@ -334,3 +334,63 @@
   background: var(--color-amber);
   color: var(--color-inverse-text);
 }
+
+/* ============================
+   Mobile Responsive
+   ============================ */
+
+@media (max-width: 768px) {
+  .archive-container {
+    perspective: 1200px;
+  }
+
+  .room__side img {
+    max-width: 65%;
+    max-height: 50%;
+  }
+
+  .room__side--back img {
+    margin: 0 3%;
+  }
+
+  .room__side--left img {
+    margin: 0 0 0 10%;
+  }
+
+  .room__side--right img {
+    margin: 0 10% 0 0;
+  }
+
+  .archive-title {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+    padding: 0 1rem;
+  }
+
+  .archive-subtitle {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+  }
+
+  .archive-meta {
+    font-size: 11px;
+    padding: 0 1.5rem;
+    line-height: 1.8;
+  }
+
+  .archive-content {
+    padding-bottom: 12vh;
+  }
+
+  .nav-arrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-arrow--left {
+    left: 0.5rem;
+  }
+
+  .nav-arrow--right {
+    right: 0.5rem;
+  }
+}
