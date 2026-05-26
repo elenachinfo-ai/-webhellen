@@ -61,8 +61,7 @@ export default function WavesVideo() {
 
       <div
         ref={containerRef}
-        className="mx-auto relative"
-        className="w-full md:w-[90vw]"
+        className="mx-auto relative w-full md:w-[90vw]"
         style={{
           maxWidth: '1600px',
           aspectRatio: '16/9',
