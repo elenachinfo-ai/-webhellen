@@ -163,7 +163,7 @@ export interface WavesVideoConfig {
 export const wavesVideoConfig: WavesVideoConfig = {
   sectionLabel: "05 / НАЧНЁМ",
   title: "Ваш новый образ\nначинается здесь",
-  ctaText: "ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ",
+  ctaText: "",
   videoPath: "videos/waves.mp4",
 }
 

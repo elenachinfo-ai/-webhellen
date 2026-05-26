@@ -4,6 +4,7 @@ import Navigation from './components/Navigation';
 import FullScreenMenu from './components/FullScreenMenu';
 import HeroRoomGallery from './sections/HeroRoomGallery';
 import ParticleSculpture from './sections/ParticleSculpture';
+import CTABanner from "./sections/CTABanner"
 import LighthouseVideo from './sections/LighthouseVideo';
 import ImageGallery from './sections/ImageGallery';
 import WavesVideo from './sections/WavesVideo';
@@ -41,6 +42,7 @@ function App() {
       <main>
         <HeroRoomGallery />
         <ParticleSculpture />
+        <CTABanner />
         <LighthouseVideo />
         <ImageGallery />
         <WavesVideo />
