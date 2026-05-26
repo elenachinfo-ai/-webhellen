@@ -23,7 +23,7 @@ export default function ServicesPricing() {
   if (servicesConfig.cards.length === 0) return null;
 
   return (
-    <section id="services" ref={sectionRef} style={{ background: '#0a0a0b', padding: 'clamp(4rem, 10vw, 10rem) var(--page-padding)' }}>
+    <section id="services" ref={sectionRef} style={{ background: '#0a0a0b', padding: 'clamp(3rem, 8vw, 10rem) var(--page-padding)' }}>
       <div className="mx-auto" style={{ maxWidth: 1100 }} ref={cardsRef}>
         {servicesConfig.sectionLabel && (
           <div className="text-center" style={{ marginBottom: '1rem' }}>
@@ -41,7 +41,7 @@ export default function ServicesPricing() {
           </p>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
           {servicesConfig.cards.map((card, i) => (
             <div
               key={i}
@@ -49,7 +49,7 @@ export default function ServicesPricing() {
               style={{
                 background: 'rgba(255,255,255,0.02)',
                 border: card.highlight ? '1px solid rgba(242,91,41,0.35)' : '1px solid rgba(255,255,255,0.07)',
-                padding: 'clamp(1.5rem, 3vw, 2.5rem)',
+                padding: "clamp(1rem, 3vw, 2.5rem)",
                 position: 'relative',
                 transition: 'border-color 0.4s ease, background 0.4s ease',
                 opacity: 0,

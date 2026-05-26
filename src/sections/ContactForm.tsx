@@ -65,7 +65,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="contact" ref={sectionRef} style={{ background: '#0a0a0b', padding: 'clamp(4rem, 10vw, 10rem) var(--page-padding)', position: 'relative', overflow: 'hidden' }}>
+    <section id="contact" ref={sectionRef} style={{ background: '#0a0a0b', padding: 'clamp(3rem, 8vw, 10rem) var(--page-padding)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 'min(800px,90vw)', height: 'min(400px,60vw)', background: 'radial-gradient(circle, rgba(242,91,41,0.04) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div ref={formRef} className="mx-auto" style={{ maxWidth: 1100, opacity: 0 }}>
