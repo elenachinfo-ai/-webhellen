@@ -402,7 +402,7 @@ export default function ParticleSculpture() {
               </svg>
             </button>
             <div id="slide-dots" style={{ display: 'flex', gap: '0.5rem' }}>
-              {particleConfig.slides.map((_, i) => (
+              {particleConfig.slides.map((_) => (
                 <div
                   key={i}
                   className="slide-dot"
