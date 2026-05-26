@@ -61,9 +61,9 @@ export default function WavesVideo() {
 
       <div
         ref={containerRef}
-        className="mx-auto relative w-full md:w-[90vw] md:aspect-video"
+        className="mx-auto relative w-full md:aspect-video"
         style={{
-          maxWidth: '1600px',
+          maxWidth: '1400px',
           minHeight: "70vh", maxHeight: "100vh",
           overflow: 'hidden',
           opacity: 0,
