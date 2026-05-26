@@ -228,7 +228,7 @@ export default function FooterTicker() {
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline transition-colors duration-300 hover:text-white"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: "clamp(13px, 2vw, 15px)", fontWeight: 400, color: "#c0c0c4", letterSpacing: "0.06em", letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: "clamp(13px, 2vw, 15px)", fontWeight: 400, color: "#c0c0c4", letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
             >
               [{item.label}] {item.value}
             </a>
