@@ -53,6 +53,7 @@ export default function ServicesPricing() {
                 position: 'relative',
                 transition: 'border-color 0.4s ease, background 0.4s ease',
                 opacity: 0,
+                display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%",
               }}
             >
               {/* Popular badge */}
