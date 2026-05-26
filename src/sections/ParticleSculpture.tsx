@@ -230,7 +230,7 @@ export default function ParticleSculpture() {
     const section = sectionRef.current;
     if (!text || !section) return;
 
-    const elements = text.querySelectorAll('.animate-in');
+    const elements = text.querySelectorAll('.slide-card');
     gsap.fromTo(
       elements,
       { y: 40, opacity: 0 },
@@ -248,7 +248,42 @@ export default function ParticleSculpture() {
     );
   }, []);
 
-  if (!particleConfig.sectionLabel && !particleConfig.title && particleConfig.paragraphs.length === 0 && !particleConfig.quote) {
+  // Slider logic
+  useEffect(() => {
+    const prev = document.getElementById('slide-prev');
+    const next = document.getElementById('slide-next');
+    const dots = document.querySelectorAll('.slide-dot');
+    const slides = document.querySelectorAll<HTMLElement>('.slide-card');
+    if (!prev || !next || slides.length === 0) return;
+
+    let current = 0;
+    const total = slides.length;
+
+    function showSlide(index: number) {
+      slides.forEach((s, i) => {
+        s.style.display = i === index ? 'block' : 'none';
+        s.style.opacity = i === index ? '1' : '0';
+        s.style.transition = 'opacity 0.3s ease';
+      });
+      dots.forEach((d, i) => {
+        (d as HTMLElement).style.width = i === index ? '24px' : '8px';
+        (d as HTMLElement).style.background = i === index ? '#f25b29' : 'rgba(0,0,0,0.15)';
+      });
+      current = index;
+    }
+
+    prev.addEventListener('click', () => showSlide((current - 1 + total) % total));
+    next.addEventListener('click', () => showSlide((current + 1) % total));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+
+    return () => {
+      prev.removeEventListener('click', () => {});
+      next.removeEventListener('click', () => {});
+      dots.forEach((dot, i) => dot.removeEventListener('click', () => {}));
+    };
+  }, []);
+
+  if (!particleConfig.sectionLabel && !particleConfig.title && particleConfig.slides.length === 0 && !particleConfig.quote) {
     return null;
   }
 
@@ -266,24 +301,23 @@ export default function ParticleSculpture() {
         className="mx-auto flex flex-col md:flex-row gap-16"
         style={{ maxWidth: '1400px' }}
       >
-        {/* Left column — Interactive editorial */}
-        <div ref={textRef} className="w-full md:w-[48%]">
+{/* Left column — Slider */}
+        <div ref={textRef} className="w-full md:w-[48%] relative">
           {particleConfig.sectionLabel && (
-            <div className="section-label animate-in" style={{ marginBottom: '1.5rem' }}>
+            <div className="section-label" style={{ marginBottom: '1.5rem' }}>
               {particleConfig.sectionLabel}
             </div>
           )}
 
           {particleConfig.title && (
             <h2
-              className="animate-in"
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 color: '#141414',
                 lineHeight: 1.05,
                 letterSpacing: '-0.02em',
-                marginBottom: '2.5rem',
+                marginBottom: '2rem',
                 whiteSpace: 'pre-line',
               }}
             >
@@ -291,59 +325,122 @@ export default function ParticleSculpture() {
             </h2>
           )}
 
-          {/* Numbered cards */}
-          <div className="flex flex-col gap-5">
-            {particleConfig.paragraphs.map((text, i) => (
-              <div
-                key={i}
-                className="animate-in group"
-                style={{
-                  borderLeft: '1px solid rgba(0,0,0,0.1)',
-                  paddingLeft: '1.5rem',
-                  transition: 'border-color 0.4s ease',
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f25b29'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
-              >
-                <div style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: 10,
-                  fontWeight: 400,
-                  color: '#f25b29',
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  marginBottom: '0.5rem',
+          {/* Slides */}
+          {particleConfig.slides.map((slide, i) => (
+            <div
+              key={i}
+              className="slide-card"
+              style={{
+                display: i === 0 ? 'block' : 'none',
+                opacity: 0,
+              }}
+            >
+              {/* Number + subtitle */}
+              <div style={{ marginBottom: '1rem' }}>
+                <span style={{
+                  fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 400,
+                  color: '#f25b29', letterSpacing: '0.15em', marginRight: '1rem',
                 }}>
-                  [{(i + 1).toString().padStart(2, '0')}]
-                </div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontWeight: 300,
-                    fontSize: '15px',
-                    color: '#3a3a3c',
-                    lineHeight: 1.75,
-                    margin: 0,
-                  }}
-                  dangerouslySetInnerHTML={{ __html: text }}
-                />
+                  [{slide.number}]
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-sans)', fontSize: 14, fontWeight: 500,
+                  color: '#141414', letterSpacing: '0.05em', textTransform: 'uppercase',
+                }}>
+                  {slide.subtitle}
+                </span>
               </div>
-            ))}
+
+              {/* Text */}
+              <p style={{
+                fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: '16px',
+                color: '#3a3a3c', lineHeight: 1.8, marginBottom: '1.5rem',
+              }}>
+                {slide.text}
+              </p>
+
+              {/* Takeaway */}
+              <div style={{
+                borderTop: '1px solid rgba(0,0,0,0.08)',
+                paddingTop: '1rem',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '0.75rem',
+              }}>
+                <span style={{
+                  fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                  fontSize: '18px', color: '#f25b29', lineHeight: 1,
+                }}>
+                  &rarr;
+                </span>
+                <span style={{
+                  fontFamily: 'var(--font-sans)', fontWeight: 400,
+                  fontSize: '14px', color: '#141414', lineHeight: 1.5,
+                  fontStyle: 'italic',
+                }}>
+                  {slide.takeaway}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          {/* Navigation */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginTop: '2.5rem' }}>
+            <button
+              id="slide-prev"
+              style={{
+                background: 'none', border: '1px solid rgba(0,0,0,0.15)',
+                width: '40px', height: '40px', borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f25b29'; e.currentTarget.style.color = '#f25b29'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.15)'; e.currentTarget.style.color = '#141414'; }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <div id="slide-dots" style={{ display: 'flex', gap: '0.5rem' }}>
+              {particleConfig.slides.map((_, i) => (
+                <div
+                  key={i}
+                  className="slide-dot"
+                  style={{
+                    width: i === 0 ? '24px' : '8px',
+                    height: '8px',
+                    borderRadius: '4px',
+                    background: i === 0 ? '#f25b29' : 'rgba(0,0,0,0.15)',
+                    transition: 'all 0.3s ease',
+                    cursor: 'pointer',
+                  }}
+                />
+              ))}
+            </div>
+            <button
+              id="slide-next"
+              style={{
+                background: 'none', border: '1px solid rgba(0,0,0,0.15)',
+                width: '40px', height: '40px', borderRadius: '50%',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f25b29'; e.currentTarget.style.color = '#f25b29'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.15)'; e.currentTarget.style.color = '#141414'; }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
 
           {particleConfig.quote && (
             <blockquote
-              className="animate-in"
               style={{
-                fontFamily: 'var(--font-serif)',
-                fontStyle: 'italic',
-                fontSize: 'clamp(1.3rem, 2.5vw, 2rem)',
-                color: '#141414',
-                lineHeight: 1.15,
-                borderLeft: '3px solid #f25b29',
-                paddingLeft: '1.5rem',
-                margin: '3rem 0 0',
-                opacity: 0.85,
+                fontFamily: 'var(--font-serif)', fontStyle: 'italic',
+                fontSize: 'clamp(1.2rem, 2.5vw, 1.8rem)', color: '#141414',
+                lineHeight: 1.15, borderLeft: '3px solid #f25b29',
+                paddingLeft: '1.5rem', margin: '3rem 0 0', opacity: 0.8,
               }}
             >
               {particleConfig.quote}
