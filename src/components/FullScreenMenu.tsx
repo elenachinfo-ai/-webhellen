@@ -8,6 +8,19 @@ interface FullScreenMenuProps {
   onNavigate: (sectionId: string) => void;
 }
 
+const menuIcons: Record<string, JSX.Element> = {
+  tg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem', opacity: 0.5 }}><path d="M21.5 3.5L2.5 11l6 2.5M21.5 3.5l-4 18-8-7m8 7l-8-7m8 7l-2.5-6m-5.5 1l-4 4"/></svg>,
+  email: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem', opacity: 0.5 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>,
+  ig: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem', opacity: 0.5 }}><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="18" cy="6" r="1"/></svg>,
+};
+
+function getIcon(label: string) {
+  if (label.includes('Telegram') || label.includes('TG')) return menuIcons.tg;
+  if (label.includes('Email') || label.includes('@')) return menuIcons.email;
+  if (label.includes('Instagram') || label.includes('IG')) return menuIcons.ig;
+  return null;
+}
+
 export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScreenMenuProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
@@ -96,15 +109,23 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
                 className="menu-link text-left cursor-pointer bg-transparent group py-2"
                 onClick={() => handleLinkClick(link.target)}
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
-                  color: '#ffffff',
+                  fontFamily: getIcon(link.label) ? 'var(--font-mono)' : 'var(--font-serif)',
+                  fontSize: getIcon(link.label) ? 'clamp(13px, 2vw, 16px)' : 'clamp(1.5rem, 5vw, 3.5rem)',
+                  color: getIcon(link.label) ? '#8e8e93' : '#ffffff',
                   lineHeight: 1.5,
                   border: 'none',
                   WebkitTapHighlightColor: 'transparent',
+                  transition: 'color 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  if (getIcon(link.label)) e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  if (getIcon(link.label)) e.currentTarget.style.color = '#8e8e93';
                 }}
               >
                 <span className="relative inline-block">
+                  {getIcon(link.label)}
                   {link.label}
                   <span
                     className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full transition-all duration-300 ease-out"
