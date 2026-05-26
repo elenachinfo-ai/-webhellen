@@ -32,6 +32,9 @@ export const navigationConfig: NavigationConfig = {
     { label: "ПРОЦЕСС", target: "lighthouse" },
     { label: "ПОРТФОЛИО", target: "waves-gallery" },
     { label: "СВЯЗАТЬСЯ", target: "waves-video" },
+    { label: "Telegram: @hellen_stylist", target: "contact" },
+    { label: "Email: hello@hellen-stylist.ru", target: "contact" },
+    { label: "Instagram: @hellen_stylist", target: "contact" },
   ],
   menuSideInfo: [
     "HELLEN",
