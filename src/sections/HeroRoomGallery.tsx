@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { heroConfig } from '../config';
 
 export default function HeroRoomGallery() {
@@ -12,6 +12,9 @@ export default function HeroRoomGallery() {
     isMoving: false,
     mouseEnabled: true,
   });
+  const [cameraZ, setCameraZ] = useState(
+    typeof window !== 'undefined' && window.innerWidth < 768 ? '100px' : '500px'
+  );
 
   const rooms = heroConfig.rooms;
 
@@ -64,7 +67,7 @@ export default function HeroRoomGallery() {
       nextRoom.style.opacity = '1';
 
       const resetTransform = { translateX: '0', translateY: '0', translateZ: '0', rotX: '0', rotY: '0' };
-      const initTransform = { translateX: '0', translateY: '0', translateZ: '500px', rotX: '0', rotY: '0' };
+      const initTransform = { translateX: '0', translateY: '0', translateZ: cameraZ, rotX: '0', rotY: '0' };
 
       // Phase 1: Retreat to Z=0
       scroller.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -122,7 +125,7 @@ export default function HeroRoomGallery() {
       firstRoom.classList.add('room--current');
       firstRoom.style.opacity = '1';
     }
-    applyRoomTransform({ translateX: '0', translateY: '0', translateZ: '500px', rotX: '0', rotY: '0' });
+    applyRoomTransform({ translateX: '0', translateY: '0', translateZ: cameraZ, rotX: '0', rotY: '0' });
 
     // Mouse tilt
     const handleMouseMove = (e: MouseEvent) => {
@@ -132,10 +135,16 @@ export default function HeroRoomGallery() {
       const rotX = -(e.clientY / window.innerHeight - 0.5) * 4;
       const rotY = (e.clientX / window.innerWidth - 0.5) * 6;
 
-      scroller.style.transform = `translate3d(0, 0, 500px) rotate3d(1,0,0,${rotX}deg) rotate3d(0,1,0,${rotY}deg)`;
+      scroller.style.transform = `translate3d(0, 0, ${cameraZ}) rotate3d(1,0,0,${rotX}deg) rotate3d(0,1,0,${rotY}deg)`;
     };
 
     container.addEventListener('mousemove', handleMouseMove);
+
+    // Resize handler for mobile camera
+    const handleResize = () => {
+      setCameraZ(window.innerWidth < 768 ? '100px' : '500px');
+    };
+    window.addEventListener('resize', handleResize);
 
     // Keyboard navigation
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -147,6 +156,7 @@ export default function HeroRoomGallery() {
     return () => {
       container.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleResize);
     };
   }, [navigate, applyRoomTransform, rooms]);
 
