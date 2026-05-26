@@ -191,62 +191,51 @@ export default function FooterTicker() {
     return null;
   }
 
+  const contacts = [
+    { label: 'TG', value: '@hellen_stylist', href: 'https://t.me/hellen_stylist' },
+    { label: 'WA', value: '+7 (916) 555-44-33', href: 'https://wa.me/79165554433' },
+    { label: 'Email', value: 'hello@hellen-stylist.ru', href: 'mailto:hello@hellen-stylist.ru' },
+    { label: 'IG', value: '@hellen_stylist', href: 'https://instagram.com/hellen_stylist' },
+  ];
+
   return (
     <footer
       id="footer"
       style={{
         background: '#0a0a0b',
-        padding: '6rem var(--page-padding) 3rem',
+        padding: '0 var(--page-padding) 3rem',
       }}
     >
-      {/* Contacts row */}
-      <div className="mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8" style={{ maxWidth: 1100, marginBottom: '5rem' }}>
-        {/* Left: contacts icon + label */}
-        <div>
-          <div style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#7a7c7f', marginBottom: '1.5rem' }}>
-            <span style={{ marginRight: '0.5rem' }}>&#9997;</span> КОНТАКТЫ
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-            {[
-              { label: 'Telegram', value: '@hellen_stylist', href: 'https://t.me/hellen_stylist' },
-              { label: 'WhatsApp', value: '+7 (916) 555-44-33', href: 'https://wa.me/79165554433' },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="no-underline transition-colors duration-300 hover:text-white"
-                style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 14, color: '#b0b2b5', lineHeight: 2 }}
-              >
-                {item.label}: {item.value}
-              </a>
-            ))}
-          </div>
-        </div>
+      {/* Horizontal rule */}
+      <div className="mx-auto" style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '2rem' }} />
 
-        {/* Right: more contacts */}
-        <div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-            {[
-              { label: 'Email', value: 'hello@hellen-stylist.ru', href: 'mailto:hello@hellen-stylist.ru' },
-              { label: 'Instagram', value: '@hellen_stylist', href: 'https://instagram.com/hellen_stylist' },
-            ].map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="no-underline transition-colors duration-300 hover:text-white"
-                style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 14, color: '#b0b2b5', lineHeight: 2 }}
-              >
-                {item.label}: {item.value}
-              </a>
-            ))}
-            <div style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 14, color: '#b0b2b5', lineHeight: 2, marginTop: '0.25rem' }}>
-              Москва, ЦАО
-            </div>
-          </div>
+      {/* Bottom bar */}
+      <div className="mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+        {/* Left: credit */}
+        <a
+          href="https://elenach.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline transition-colors duration-300 hover:text-white"
+          style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 300, color: '#555' }}
+        >
+          Design by elenach.com
+        </a>
+
+        {/* Right: contacts in one line */}
+        <div className="flex flex-wrap gap-x-5 gap-y-1">
+          {contacts.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline transition-colors duration-300 hover:text-white"
+              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 400, color: '#6a6a6e', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
+            >
+              [{item.label}] {item.value}
+            </a>
+          ))}
         </div>
       </div>
 
@@ -270,23 +259,12 @@ export default function FooterTicker() {
         </div>
       )}
 
-      {/* Bottom bar */}
-      <div className="mx-auto flex flex-col md:flex-row justify-between items-center gap-2" style={{ maxWidth: 1100, borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem' }}>
-        <a
-          href="https://elenach.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="no-underline transition-colors duration-300 hover:text-white"
-          style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 300, color: '#555' }}
-        >
-          Сделано дизайн-студией elenach.com
-        </a>
-        {footerConfig.copyright && (
-          <div style={{ fontFamily: 'var(--font-sans)', fontSize: 11, color: '#555' }}>
-            {footerConfig.copyright}
-          </div>
-        )}
-      </div>
+      {/* Copyright */}
+      {footerConfig.copyright && (
+        <div className="mx-auto" style={{ marginTop: '2rem', fontFamily: 'var(--font-sans)', fontSize: 10, color: '#444' }}>
+          {footerConfig.copyright}
+        </div>
+      )}
     </footer>
   );
 }
