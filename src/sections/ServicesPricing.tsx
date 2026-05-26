@@ -95,6 +95,7 @@ export default function ServicesPricing() {
                 {card.description}
               </p>
 
+              <div className="mt-auto" style={{ width: '100%' }}>
               {/* Divider */}
               <div style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '1.25rem' }} />
 
@@ -180,6 +181,7 @@ export default function ServicesPricing() {
                   Связаться &rarr;
                 </a>
               </div>
+            </div>
             </div>
           ))}
         </div>
