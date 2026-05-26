@@ -341,49 +341,55 @@
 
 @media (max-width: 768px) {
   .archive-container {
-    perspective: 1200px;
+    perspective: 1000px;
   }
 
   .room__side img {
-    max-width: 65%;
-    max-height: 50%;
+    max-width: 70%;
+    max-height: 55%;
   }
 
   .room__side--back img {
-    margin: 0 3%;
+    margin: 0 2%;
   }
 
   .room__side--left img {
-    margin: 0 0 0 10%;
+    margin: 0 0 0 8%;
   }
 
   .room__side--right img {
-    margin: 0 10% 0 0;
+    margin: 0 8% 0 0;
   }
 
   .archive-title {
-    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-size: clamp(2.5rem, 11vw, 4rem);
     padding: 0 1rem;
+    line-height: 1.05;
   }
 
   .archive-subtitle {
-    font-size: 12px;
-    letter-spacing: 0.15em;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    margin-top: 0.5rem;
   }
 
   .archive-meta {
-    font-size: 11px;
-    padding: 0 1.5rem;
-    line-height: 1.8;
+    font-size: 13px;
+    padding: 0 1rem;
+    line-height: 2;
+    letter-spacing: 0.1em;
   }
 
   .archive-content {
-    padding-bottom: 12vh;
+    padding-bottom: 6vh;
+    justify-content: center;
+    gap: 0.5rem;
   }
 
   .nav-arrow {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.8;
   }
 
   .nav-arrow--left {
