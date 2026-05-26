@@ -41,7 +41,7 @@ export default function ServicesPricing() {
           </p>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 items-stretch">
           {servicesConfig.cards.map((card, i) => (
             <div
               key={i}
