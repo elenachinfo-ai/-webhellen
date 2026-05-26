@@ -176,121 +176,86 @@ export default function ImageGallery() {
       {selected && (
         <div
           style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 9999,
+            position: 'fixed', inset: 0, zIndex: 9999,
             background: 'rgba(10, 10, 11, 0.95)',
             backdropFilter: 'blur(8px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '5vh 5vw',
-            cursor: 'pointer',
-            animation: 'fadeIn 0.3s ease',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '5vh 5vw', cursor: 'pointer', animation: 'fadeIn 0.3s ease',
           }}
           onClick={() => setSelectedIndex(null)}
         >
           <div
+            className="flex flex-col md:flex-row"
             style={{
-              display: 'flex',
-              gap: '4vw',
-              maxWidth: 1400,
-              width: '100%',
-              maxHeight: '80vh',
-              alignItems: 'center',
-              cursor: 'default',
+              gap: 'max(1rem, 3vw)', maxWidth: 1100, width: '100%%',
+              maxHeight: '90vh', alignItems: 'flex-start', cursor: 'default',
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Image — left */}
-            <div style={{ flex: '0 0 55%', maxHeight: '80vh' }}>
-              <img
-                src={selected.src}
-                alt={selected.caption}
-                style={{
-                  width: '100%',
-                  maxHeight: '80vh',
-                  objectFit: 'contain',
-                  display: 'block',
-                }}
-              />
-            </div>
-
-            {/* Description — right */}
-            <div style={{ flex: '1 1 45%', overflow: 'auto', maxHeight: '80vh' }}>
-              <h3
-                style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-                  color: '#ffffff',
-                  lineHeight: 1.15,
-                  letterSpacing: '-0.02em',
-                  marginBottom: '1.5rem',
-                }}
-              >
-                {selected.caption}
-              </h3>
-              <p
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '15px',
-                  fontWeight: 300,
-                  lineHeight: 1.85,
-                  color: '#b0b2b5',
-                }}
-              >
-                {selected.description}
-              </p>
-
-              {/* Close hint */}
-              {galleryConfig.lightboxCloseHint && (
-                <div
-                  style={{
-                    marginTop: '2rem',
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '11px',
-                    color: '#666',
-                    letterSpacing: '0.1em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {galleryConfig.lightboxCloseHint}
-                </div>
-              )}
-            </div>
-
             {/* Close button */}
             <button
               onClick={() => setSelectedIndex(null)}
               style={{
-                position: 'absolute',
-                top: '3vh',
-                right: '3vw',
-                background: 'none',
-                border: 'none',
-                color: '#999',
-                fontSize: '2rem',
-                cursor: 'pointer',
-                lineHeight: 1,
-                transition: 'color 0.2s',
+                position: 'fixed', top: '1rem', right: '1rem', zIndex: 10,
+                background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
+                borderRadius: '50%%', width: '40px', height: '40px', color: '#888',
+                fontSize: '1.4rem', cursor: 'pointer', display: 'flex',
+                alignItems: 'center', justifyContent: 'center',
               }}
-              onMouseEnter={(e) => { (e.target as HTMLElement).style.color = '#fff'; }}
-              onMouseLeave={(e) => { (e.target as HTMLElement).style.color = '#999'; }}
             >
               &times;
             </button>
+
+            {/* Image */}
+            <div style={{ width: '100%%', maxHeight: '65vh' }}>
+              <img
+                src={selected.src} alt={selected.caption}
+                style={{ width: '100%%', maxHeight: '65vh', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+
+            {/* Description */}
+            <div className="w-full md:flex-1" style={{ maxHeight: '65vh', overflowY: 'auto' }}>
+              <div style={{
+                display: 'inline-block', fontFamily: 'var(--font-mono)',
+                fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.15em',
+                color: '#f25b29', border: '1px solid rgba(242,91,41,0.3)',
+                borderRadius: '4px', padding: '4px 10px', marginBottom: '1rem',
+              }}>
+                [ portfolio ]
+              </div>
+              <h3 style={{
+                fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.3rem, 3vw, 2rem)',
+                color: '#fff', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: '0.8rem',
+              }}>
+                {selected.caption}
+              </h3>
+              <div style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.2)', marginBottom: '1rem' }} />
+              <p style={{
+                fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px, 2vw, 15px)',
+                fontWeight: 300, lineHeight: 1.75, color: '#b0b2b5',
+              }}>
+                {selected.description}
+              </p>
+              {galleryConfig.lightboxCloseHint && (
+                <div style={{
+                  marginTop: '1.5rem', fontFamily: 'var(--font-sans)',
+                  fontSize: '10px', color: '#555', letterSpacing: '0.12em',
+                  textTransform: 'uppercase',
+                }}>
+                  {galleryConfig.lightboxCloseHint}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
 
       <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes pulseArrow {
-          0%, 100% { transform: scale(1); opacity: 0.85; }
-          50% { transform: scale(1.12); opacity: 1; }
+          0%%, 100%% { transform: scale(1); opacity: 0.85; }
+          50%% { transform: scale(1.12); opacity: 1; }
         }
       `}</style>
     </>
