@@ -193,7 +193,6 @@ export default function FooterTicker() {
 
   const contacts = [
     { label: 'TG', value: '@hellen_stylist', href: 'https://t.me/hellen_stylist' },
-    { label: 'WA', value: '+7 (916) 555-44-33', href: 'https://wa.me/79165554433' },
     { label: 'Email', value: 'hello@hellen-stylist.ru', href: 'mailto:hello@hellen-stylist.ru' },
     { label: 'IG', value: '@hellen_stylist', href: 'https://instagram.com/hellen_stylist' },
   ];
@@ -231,7 +230,7 @@ export default function FooterTicker() {
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline transition-colors duration-300 hover:text-white"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 400, color: '#8e8e93', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 400, color: '#b0b2b5', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
             >
               [{item.label}] {item.value}
             </a>
