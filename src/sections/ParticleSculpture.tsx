@@ -284,12 +284,10 @@ export default function ParticleSculpture() {
                 lineHeight: 1.05,
                 letterSpacing: '-0.02em',
                 marginBottom: '2.5rem',
+                whiteSpace: 'pre-line',
               }}
             >
-              {particleConfig.title.split('
-').map((line, i) => (
-                <span key={i}>{line}{i === 0 && <br />}</span>
-              ))}
+              {particleConfig.title}
             </h2>
           )}
 
@@ -316,7 +314,7 @@ export default function ParticleSculpture() {
                   textTransform: 'uppercase',
                   marginBottom: '0.5rem',
                 }}>
-                  [{String(i + 1).padStart(2, '0')}]
+                  [{(i + 1).toString().padStart(2, '0')}]
                 </div>
                 <p
                   style={{
