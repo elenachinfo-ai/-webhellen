@@ -236,14 +236,14 @@ export default function FooterTicker() {
         <div className="flex flex-wrap gap-x-6 gap-y-2">
           {contacts.map((item) => (
             <a
-              key={item.label}
+              key={item.type}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline transition-colors duration-300 hover:text-white"
               style={{ fontFamily: 'var(--font-mono)', fontSize: "clamp(13px, 2vw, 15px)", fontWeight: 400, color: "#c0c0c4", letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
             >
-              [{item.label}] {item.value}
+              {renderIcon(item.type)}{item.value}
             </a>
           ))}
         </div>
