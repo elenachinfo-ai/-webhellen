@@ -109,8 +109,8 @@ export default function ServicesPricing() {
                       {item.name}
                     </span>
                     <span style={{
-                      fontFamily: 'var(--font-mono)', fontSize: 'clamp(11px, 1.3vw, 13px)',
-                      fontWeight: 400, color: '#fff', letterSpacing: '0.05em',
+                      fontFamily: 'var(--font-mono)', fontSize: 'clamp(15px, 2vw, 18px)',
+                      fontWeight: 500, color: '#fff', letterSpacing: '0.05em',
                       whiteSpace: 'nowrap', marginLeft: '1rem',
                     }}>
                       {item.price}
