@@ -41,7 +41,7 @@ export default function ServicesPricing() {
           </p>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-5">
           {servicesConfig.cards.map((card, i) => (
             <div
               key={i}
@@ -68,6 +68,7 @@ export default function ServicesPricing() {
                 </div>
               )}
 
+              <div>
               {/* Tag */}
               <div style={{
                 fontFamily: 'var(--font-mono)', fontSize: 10, fontWeight: 400,
@@ -94,6 +95,7 @@ export default function ServicesPricing() {
               }}>
                 {card.description}
               </p>
+              </div>
 
               <div className="mt-auto" style={{ width: '100%' }}>
               {/* Divider */}
