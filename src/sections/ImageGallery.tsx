@@ -236,6 +236,7 @@ export default function ImageGallery() {
               }}>
                 <span
                   dangerouslySetInnerHTML={{ __html: selected.description }}
+                  className="[&_strong]:block [&_strong]:mt-3 [&_strong]:pt-3 [&_strong]:border-t [&_strong]:border-white/10 [&_strong]:text-base md:[&_strong]:text-lg [&_strong]:font-medium [&_strong]:text-white [&_strong]:tracking-wide"
                   style={{ fontWeight: 300, lineHeight: 1.75, color: '#b0b2b5' }}
                 />
               </p>
