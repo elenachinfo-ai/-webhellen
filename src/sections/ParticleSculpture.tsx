@@ -410,7 +410,7 @@ export default function ParticleSculpture() {
                     width: i === 0 ? '24px' : '8px',
                     height: '8px',
                     borderRadius: '4px',
-                    background: i === 0 ? '#f25b29' : 'rgba(0,0,0,0.15)',
+                    background: true ? '#f25b29' : 'rgba(0,0,0,0.15)',
                     transition: 'all 0.3s ease',
                     cursor: 'pointer',
                   }}
