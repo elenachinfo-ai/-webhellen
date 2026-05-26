@@ -50,7 +50,7 @@ export default function WavesVideo() {
       
       style={{
         background: '#0a0a0b',
-        padding: 'clamp(4rem, 10vw, 12rem) var(--page-padding) clamp(3rem, 6vw, 8rem)',
+        padding: 'clamp(2rem, 8vw, 12rem) var(--page-padding) clamp(2rem, 5vw, 8rem)',
       }}
     >
       {wavesVideoConfig.sectionLabel && (
@@ -61,7 +61,7 @@ export default function WavesVideo() {
 
       <div
         ref={containerRef}
-        className="mx-auto relative w-full md:w-[90vw] aspect-[9/16] md:aspect-video"
+        className="mx-auto relative w-full md:w-[90vw] md:aspect-video"
         style={{
           maxWidth: '1600px',
           maxHeight: '100vh',
@@ -85,11 +85,11 @@ export default function WavesVideo() {
         {/* Typography overlay */}
         <div
           ref={overlayRef}
-          className="absolute bottom-0 left-0 right-0"
+          className="absolute inset-0 flex flex-col items-center justify-center text-center"
           style={{
             padding: '4rem',
             opacity: 0,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)',
+            background: 'rgba(0,0,0,0.35)',
           }}
         >
           {wavesVideoConfig.title && (
