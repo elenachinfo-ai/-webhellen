@@ -39,12 +39,12 @@ export default function ContactForm() {
 
   if (!contactConfig.title && !contactConfig.buttonText) return null;
 
-  const inputStyle = {
-    width: '100%' as const,
+  const inputStyle = (isLast: boolean) => ({
+    width: '100%',
     background: 'rgba(255,255,255,0.03)',
     border: '1px solid rgba(255,255,255,0.1)',
-    borderRadius: 0,
-    padding: '1rem 1.2rem',
+    borderRight: isLast ? undefined : 'none',
+    padding: '1.1rem 1.5rem',
     fontFamily: 'var(--font-sans)',
     fontSize: '15px',
     fontWeight: 300,
@@ -52,73 +52,94 @@ export default function ContactForm() {
     outline: 'none',
     transition: 'border-color 0.3s ease, background 0.3s ease',
     caretColor: '#f25b29',
+  });
+
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.style.borderColor = 'rgba(242,91,41,0.5)';
+    e.target.style.background = 'rgba(255,255,255,0.05)';
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.style.borderColor = 'rgba(255,255,255,0.1)';
+    e.target.style.background = 'rgba(255,255,255,0.03)';
   };
 
   return (
-    <section id="contact" ref={sectionRef} style={{ background: '#0a0a0b', padding: 'clamp(4rem, 10vw, 12rem) var(--page-padding)', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 'min(600px,80vw)', height: 'min(600px,80vw)', background: 'radial-gradient(circle, rgba(242,91,41,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-      <div ref={formRef} className="mx-auto" style={{ maxWidth: 520, opacity: 0 }}>
+    <section id="contact" ref={sectionRef} style={{ background: '#0a0a0b', padding: 'clamp(4rem, 10vw, 10rem) var(--page-padding)', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 'min(800px,90vw)', height: 'min(400px,60vw)', background: 'radial-gradient(circle, rgba(242,91,41,0.04) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <div ref={formRef} className="mx-auto" style={{ maxWidth: 900, opacity: 0 }}>
         {contactConfig.sectionLabel && (
-          <div className="text-center" style={{ marginBottom: '2rem' }}>
+          <div className="text-center" style={{ marginBottom: '1.5rem' }}>
             <div className="section-label">{contactConfig.sectionLabel}</div>
           </div>
         )}
         {contactConfig.title && (
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem,5vw,3.5rem)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.02em', textAlign: 'center', marginBottom: '0.75rem', whiteSpace: 'pre-line' }}>
+          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(2rem,5vw,3.5rem)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.02em', textAlign: 'center', marginBottom: '0.5rem' }}>
             {contactConfig.title}
           </h2>
         )}
         {contactConfig.subtitle && (
-          <p style={{ fontFamily: 'var(--font-sans)', fontSize: 14, fontWeight: 300, color: '#7a7c7f', textAlign: 'center', marginBottom: '3rem' }}>
+          <p style={{ fontFamily: 'var(--font-sans)', fontSize: 14, fontWeight: 300, color: '#7a7c7f', textAlign: 'center', marginBottom: '2.5rem' }}>
             {contactConfig.subtitle}
           </p>
         )}
+
         {!submitted ? (
           <form onSubmit={handleSubmit}>
-            <div style={{ marginBottom: '1rem' }}>
-              <input
-                type="text" value={name} onChange={(e) => setName(e.target.value)}
-                placeholder={contactConfig.namePlaceholder} required
-                style={inputStyle}
-                onFocus={(e) => { e.target.style.borderColor = 'rgba(242,91,41,0.5)'; e.target.style.background = 'rgba(255,255,255,0.05)'; }}
-                onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)'; e.target.style.background = 'rgba(255,255,255,0.03)'; }}
-              />
+            <div className="flex flex-col md:flex-row" style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              {/* Name */}
+              <div className="flex-1" style={{ minWidth: 0 }}>
+                <input
+                  type="text" value={name} onChange={(e) => setName(e.target.value)}
+                  placeholder={contactConfig.namePlaceholder} required
+                  style={inputStyle(false)}
+                  onFocus={handleFocus} onBlur={handleBlur}
+                />
+              </div>
+              {/* Phone */}
+              <div className="flex-1" style={{ minWidth: 0 }}>
+                <input
+                  type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))}
+                  placeholder={contactConfig.phonePlaceholder} required
+                  style={inputStyle(true)}
+                  onFocus={handleFocus} onBlur={handleBlur}
+                />
+              </div>
+              {/* Button */}
+              <button
+                type="submit"
+                style={{
+                  flexShrink: 0,
+                  background: '#f25b29',
+                  border: 'none',
+                  padding: '1.1rem 2.5rem',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 12,
+                  fontWeight: 500,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.2em',
+                  color: '#fff',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#d14a1f';
+                  e.currentTarget.style.letterSpacing = '0.3em';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#f25b29';
+                  e.currentTarget.style.letterSpacing = '0.2em';
+                }}
+              >
+                {contactConfig.buttonText}
+              </button>
             </div>
-            <div style={{ marginBottom: '2rem' }}>
-              <input
-                type="tel" value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))}
-                placeholder={contactConfig.phonePlaceholder} required
-                style={inputStyle}
-                onFocus={(e) => { e.target.style.borderColor = 'rgba(242,91,41,0.5)'; e.target.style.background = 'rgba(255,255,255,0.05)'; }}
-                onBlur={(e) => { e.target.style.borderColor = 'rgba(255,255,255,0.1)'; e.target.style.background = 'rgba(255,255,255,0.03)'; }}
-              />
-            </div>
-            <button
-              type="submit"
-              className="group relative overflow-hidden"
-              style={{
-                width: '100%', background: 'transparent', border: '1px solid rgba(242,91,41,0.5)',
-                padding: '1.1rem 2rem', fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 400,
-                textTransform: 'uppercase', letterSpacing: '0.2em', color: '#f25b29',
-                cursor: 'pointer', transition: 'all 0.35s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = '#f25b29';
-                e.currentTarget.style.color = '#fff';
-                e.currentTarget.style.letterSpacing = '0.3em';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
-                e.currentTarget.style.color = '#f25b29';
-                e.currentTarget.style.letterSpacing = '0.2em';
-              }}
-            >
-              {contactConfig.buttonText} <span className="inline-block ml-2">&rarr;</span>
-            </button>
           </form>
         ) : (
-          <div style={{ textAlign: 'center', padding: '3rem 2rem', border: '1px solid rgba(242,91,41,0.3)', background: 'rgba(242,91,41,0.05)' }}>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f25b29" strokeWidth="1.2" style={{ margin: '0 auto 1.5rem', display: 'block' }}>
+          <div style={{ textAlign: 'center', padding: '3rem 2rem', border: '1px solid rgba(242,91,41,0.2)', background: 'rgba(242,91,41,0.03)' }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f25b29" strokeWidth="1.2" style={{ margin: '0 auto 1rem', display: 'block' }}>
               <path d="M20 6L9 17l-5-5" />
             </svg>
             <p style={{ fontFamily: 'var(--font-sans)', fontSize: 15, fontWeight: 300, color: '#b0b2b5', lineHeight: 1.6 }}>
