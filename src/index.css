@@ -398,9 +398,10 @@
   }
 
   .archive-meta {
-    font-size: 13px;
+    font-size: 10px;
     padding: 0 1rem;
-    line-height: 2;
+    line-height: 1.8;
+    letter-spacing: 0.08em;
   }
 
   .archive-content {

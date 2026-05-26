@@ -47,9 +47,10 @@ export default function WavesVideo() {
     <section
       id="waves-video"
       ref={sectionRef}
+      className="px-0 md:px-[var(--page-padding)]"
       style={{
         background: '#0a0a0b',
-        padding: '8rem var(--page-padding) 12rem',
+        padding: '4rem 0 8rem',
       }}
     >
       {wavesVideoConfig.sectionLabel && (
@@ -61,8 +62,8 @@ export default function WavesVideo() {
       <div
         ref={containerRef}
         className="mx-auto relative"
+        className="w-full md:w-[90vw]"
         style={{
-          width: '90vw',
           maxWidth: '1600px',
           aspectRatio: '16/9',
           overflow: 'hidden',
