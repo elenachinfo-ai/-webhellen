@@ -261,31 +261,65 @@ export const contactConfig: ContactConfig = {
 
 // --- Services Pricing ---
 
-export interface ServiceItem {
+export interface ServiceSubItem {
   name: string
   price: string
+}
+
+export interface ServiceCard {
+  title: string
+  tag: string
+  description: string
+  items: ServiceSubItem[]
+  highlight?: string
 }
 
 export interface ServicesConfig {
   sectionLabel: string
   title: string
   subtitle: string
-  items: ServiceItem[]
+  cards: ServiceCard[]
   footnote: string
 }
 
 export const servicesConfig: ServicesConfig = {
   sectionLabel: '07 / УСЛУГИ',
   title: 'Прайс-лист',
-  subtitle: 'Индивидуальный подход к каждому проекту',
-  items: [
-    { name: 'Разбор гардероба', price: '25 000 ₽' },
-    { name: 'Шопинг-сопровождение', price: '50 000 ₽' },
-    { name: 'Создание образа', price: '25 000 ₽' },
-    { name: 'Капсульный гардероб', price: '75 000 ₽' },
-    { name: 'Стилизация фотосессии', price: '45 000 ₽' },
+  subtitle: 'Выберите формат работы',
+  cards: [
+    {
+      title: 'Базовый',
+      tag: '[ start ]',
+      description: 'Для тех, кто хочет навести порядок в гардеробе и понять свой стиль',
+      items: [
+        { name: 'Консультация по стилю', price: '10 000 ₽' },
+        { name: 'Разбор гардероба', price: '25 000 ₽' },
+        { name: 'Lookbook на сезон', price: '15 000 ₽' },
+      ],
+    },
+    {
+      title: 'Оптимальный',
+      tag: '[ optimal ]',
+      description: 'Полное сопровождение: от анализа до готовых образов',
+      items: [
+        { name: 'Шопинг-сопровождение', price: '50 000 ₽' },
+        { name: 'Создание образа под ключ', price: '35 000 ₽' },
+        { name: 'Ревизия гардероба', price: '20 000 ₽' },
+      ],
+      highlight: 'Популярный',
+    },
+    {
+      title: 'Премиум',
+      tag: '[ premium ]',
+      description: 'Максимальное погружение и персональный стиль на год',
+      items: [
+        { name: 'Капсульный гардероб', price: '75 000 ₽' },
+        { name: 'Стилизация фотосессии', price: '45 000 ₽' },
+        { name: 'Персональный стилист на год', price: '150 000 ₽' },
+      ],
+    },
   ],
-  footnote: '* Стоимость зависит от объёма работ и уточняется на консультации',
+  footnote: '* Все цены индивидуальны и уточняются на консультации',
 }
 
 // --- Footer ---
