@@ -389,7 +389,7 @@ export default function ParticleSculpture() {
             <button
               id="slide-prev"
               style={{
-                background: 'none', border: '1px solid rgba(0,0,0,0.15)',
+                background: "none", color: "#141414", border: '1px solid rgba(0,0,0,0.15)',
                 width: '40px', height: '40px', borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer', transition: 'all 0.3s ease',
@@ -420,7 +420,7 @@ export default function ParticleSculpture() {
             <button
               id="slide-next"
               style={{
-                background: 'none', border: '1px solid rgba(0,0,0,0.15)',
+                background: "none", color: "#141414", border: '1px solid rgba(0,0,0,0.15)',
                 width: '40px', height: '40px', borderRadius: '50%',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer', transition: 'all 0.3s ease',
