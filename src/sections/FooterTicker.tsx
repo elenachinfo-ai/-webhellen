@@ -209,20 +209,18 @@ export default function FooterTicker() {
       <div className="mx-auto" style={{ height: '1px', background: 'rgba(255,255,255,0.06)', marginBottom: '2rem' }} />
 
       {/* Bottom bar */}
-      <div className="mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-        {/* Left: credit */}
+      <div className="mx-auto flex flex-col items-start gap-4">
         <a
           href="https://elenach.com"
           target="_blank"
           rel="noopener noreferrer"
           className="no-underline transition-colors duration-300 hover:text-white"
-          style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px, 2vw, 18px)', fontWeight: 400, color: '#b0b2b5', letterSpacing: '-0.01em' }}
+          style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px, 1.5vw, 14px)', fontWeight: 300, color: '#6a6a6e', letterSpacing: '-0.01em' }}
         >
           Сделано студией <span style={{ color: "#f25b29" }}>elenach.com</span>
         </a>
 
-        {/* Right: contacts in one line */}
-        <div className="flex flex-wrap gap-x-5 gap-y-1">
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
           {contacts.map((item) => (
             <a
               key={item.label}
@@ -230,7 +228,7 @@ export default function FooterTicker() {
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline transition-colors duration-300 hover:text-white"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontWeight: 400, color: '#b0b2b5', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: "clamp(13px, 2vw, 15px)", fontWeight: 400, color: "#c0c0c4", letterSpacing: "0.06em", letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
             >
               [{item.label}] {item.value}
             </a>
