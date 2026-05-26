@@ -274,12 +274,12 @@ export default function ParticleSculpture() {
 
     prev.addEventListener('click', () => showSlide((current - 1 + total) % total));
     next.addEventListener('click', () => showSlide((current + 1) % total));
-    dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+    dots.forEach((dot) => dot.addEventListener('click', () => showSlide(i)));
 
     return () => {
       prev.removeEventListener('click', () => {});
       next.removeEventListener('click', () => {});
-      dots.forEach((dot, i) => dot.removeEventListener('click', () => {}));
+      dots.forEach((dot) => dot.removeEventListener('click', () => {}));
     };
   }, []);
 
@@ -328,7 +328,7 @@ export default function ParticleSculpture() {
           {/* Slides */}
           {particleConfig.slides.map((slide, i) => (
             <div
-              key={i}
+              key={idx}
               className="slide-card"
               style={{
                 display: i === 0 ? 'block' : 'none',
@@ -402,15 +402,15 @@ export default function ParticleSculpture() {
               </svg>
             </button>
             <div id="slide-dots" style={{ display: 'flex', gap: '0.5rem' }}>
-              {particleConfig.slides.map((_) => (
+              {particleConfig.slides.map((_, idx) => (
                 <div
-                  key={i}
+                  key={idx}
                   className="slide-dot"
                   style={{
-                    width: i === 0 ? '24px' : '8px',
+                    width: idx === 0 ? '24px' : '8px',
                     height: '8px',
                     borderRadius: '4px',
-                    background: true ? '#f25b29' : 'rgba(0,0,0,0.15)',
+                    background: idx === 0 ? '#f25b29' : 'rgba(0,0,0,0.15)',
                     transition: 'all 0.3s ease',
                     cursor: 'pointer',
                   }}
