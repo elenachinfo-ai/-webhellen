@@ -266,10 +266,10 @@ export default function ParticleSculpture() {
         className="mx-auto flex flex-col md:flex-row gap-16"
         style={{ maxWidth: '1400px' }}
       >
-        {/* Left column — Editorial text */}
-        <div ref={textRef} className="w-full md:w-[45%]">
+        {/* Left column — Interactive editorial */}
+        <div ref={textRef} className="w-full md:w-[48%]">
           {particleConfig.sectionLabel && (
-            <div className="section-label animate-in" style={{ marginBottom: '2rem' }}>
+            <div className="section-label animate-in" style={{ marginBottom: '1.5rem' }}>
               {particleConfig.sectionLabel}
             </div>
           )}
@@ -279,32 +279,59 @@ export default function ParticleSculpture() {
               className="animate-in"
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2rem, 5vw, 4rem)',
+                fontSize: 'clamp(2rem, 5vw, 3.5rem)',
                 color: '#141414',
                 lineHeight: 1.05,
                 letterSpacing: '-0.02em',
-                marginBottom: '3rem',
+                marginBottom: '2.5rem',
               }}
             >
-              {particleConfig.title}
+              {particleConfig.title.split('
+').map((line, i) => (
+                <span key={i}>{line}{i === 0 && <br />}</span>
+              ))}
             </h2>
           )}
 
-          {particleConfig.paragraphs.map((text, i) => (
-            <p
-              key={i}
-              className="animate-in"
-              style={{
-                fontFamily: 'var(--font-sans)',
-                fontWeight: 300,
-                fontSize: '16px',
-                color: '#141414',
-                lineHeight: 1.7,
-                marginBottom: '2rem',
-              }}
-              dangerouslySetInnerHTML={{ __html: text }}
-            />
-          ))}
+          {/* Numbered cards */}
+          <div className="flex flex-col gap-5">
+            {particleConfig.paragraphs.map((text, i) => (
+              <div
+                key={i}
+                className="animate-in group"
+                style={{
+                  borderLeft: '1px solid rgba(0,0,0,0.1)',
+                  paddingLeft: '1.5rem',
+                  transition: 'border-color 0.4s ease',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#f25b29'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'; }}
+              >
+                <div style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10,
+                  fontWeight: 400,
+                  color: '#f25b29',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  marginBottom: '0.5rem',
+                }}>
+                  [{String(i + 1).padStart(2, '0')}]
+                </div>
+                <p
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontWeight: 300,
+                    fontSize: '15px',
+                    color: '#3a3a3c',
+                    lineHeight: 1.75,
+                    margin: 0,
+                  }}
+                  dangerouslySetInnerHTML={{ __html: text }}
+                />
+              </div>
+            ))}
+          </div>
 
           {particleConfig.quote && (
             <blockquote
@@ -312,12 +339,13 @@ export default function ParticleSculpture() {
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontStyle: 'italic',
-                fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+                fontSize: 'clamp(1.3rem, 2.5vw, 2rem)',
                 color: '#141414',
-                lineHeight: 1.1,
-                borderLeft: '2px solid #f25b29',
-                paddingLeft: '2rem',
-                margin: '4rem 0',
+                lineHeight: 1.15,
+                borderLeft: '3px solid #f25b29',
+                paddingLeft: '1.5rem',
+                margin: '3rem 0 0',
+                opacity: 0.85,
               }}
             >
               {particleConfig.quote}
