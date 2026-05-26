@@ -217,9 +217,9 @@ export default function FooterTicker() {
           target="_blank"
           rel="noopener noreferrer"
           className="no-underline transition-colors duration-300 hover:text-white"
-          style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 300, color: '#555' }}
+          style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(14px, 2vw, 18px)', fontWeight: 400, color: '#b0b2b5', letterSpacing: '-0.01em' }}
         >
-          Design by elenach.com
+          Сделано студией <span style={{ color: "#f25b29" }}>elenach.com</span>
         </a>
 
         {/* Right: contacts in one line */}
@@ -231,7 +231,7 @@ export default function FooterTicker() {
               target="_blank"
               rel="noopener noreferrer"
               className="no-underline transition-colors duration-300 hover:text-white"
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 400, color: '#6a6a6e', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
+              style={{ fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 400, color: '#8e8e93', letterSpacing: '0.05em', whiteSpace: 'nowrap' }}
             >
               [{item.label}] {item.value}
             </a>
