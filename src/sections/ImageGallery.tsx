@@ -157,7 +157,6 @@ export default function ImageGallery() {
               <div
                 className="flex items-center gap-2 group-hover:text-white transition-colors duration-300"
                 style={{
-                  fontFamily: 'var(--font-sans)',
                   fontSize: 'clamp(14px, 2.5vw, 16px)',
                   color: '#c0c0c4',
                   marginTop: '0.85rem',
@@ -231,15 +230,17 @@ export default function ImageGallery() {
                 {selected.caption}
               </h3>
               <div style={{ width: '30px', height: '1px', background: 'rgba(255,255,255,0.2)', marginBottom: '1rem' }} />
+                
               <p style={{
                 fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px, 2vw, 15px)',
-                fontWeight: 300, lineHeight: 1.75, color: '#b0b2b5',
               }}>
-                {selected.description}
+                <span
+                  dangerouslySetInnerHTML={{ __html: selected.description }}
+                  style={{ fontWeight: 300, lineHeight: 1.75, color: '#b0b2b5' }}
+                />
               </p>
               {galleryConfig.lightboxCloseHint && (
                 <div style={{
-                  marginTop: '1.5rem', fontFamily: 'var(--font-sans)',
                   fontSize: '10px', color: '#555', letterSpacing: '0.12em',
                   textTransform: 'uppercase',
                 }}>
