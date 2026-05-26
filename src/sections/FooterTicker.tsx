@@ -191,10 +191,23 @@ export default function FooterTicker() {
     return null;
   }
 
+  const renderIcon = (type: string) => {
+    switch (type) {
+      case 'tg':
+        return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.35rem' }}><path d="M21.5 3.5L2.5 11l6 2.5M21.5 3.5l-4 18-8-7m8 7l-8-7m8 7l-2.5-6m-5.5 1l-4 4"/></svg>;
+      case 'email':
+        return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.35rem' }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>;
+      case 'ig':
+        return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.35rem' }}><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="18" cy="6" r="1"/></svg>;
+      default:
+        return null;
+    }
+  };
+
   const contacts = [
-    { label: 'TG', value: '@hellen_stylist', href: 'https://t.me/hellen_stylist' },
-    { label: 'Email', value: 'hello@hellen-stylist.ru', href: 'mailto:hello@hellen-stylist.ru' },
-    { label: 'IG', value: '@hellen_stylist', href: 'https://instagram.com/hellen_stylist' },
+    { type: 'tg', value: '@hellen_stylist', href: 'https://t.me/hellen_stylist' },
+    { type: 'email', value: 'hello@hellen-stylist.ru', href: 'mailto:hello@hellen-stylist.ru' },
+    { type: 'ig', value: '@hellen_stylist', href: 'https://instagram.com/hellen_stylist' },
   ];
 
   return (
@@ -215,7 +228,7 @@ export default function FooterTicker() {
           target="_blank"
           rel="noopener noreferrer"
           className="no-underline transition-colors duration-300 hover:text-white"
-          style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(12px, 1.5vw, 14px)', fontWeight: 300, color: '#6a6a6e', letterSpacing: '-0.01em' }}
+          style={{ fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px, 1.8vw, 15px)', fontWeight: 300, color: '#7a7c7f', letterSpacing: '-0.01em' }}
         >
           Сделано студией <span style={{ color: "#f25b29" }}>elenach.com</span>
         </a>
