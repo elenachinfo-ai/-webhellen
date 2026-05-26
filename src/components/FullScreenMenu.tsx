@@ -1,41 +1,34 @@
 import { useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
 import { gsap } from 'gsap';
 import { navigationConfig } from '../config';
-
 interface FullScreenMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (sectionId: string) => void;
 }
-
-const menuIcons: Record<string, JSX.Element> = {
+const menuIcons: Record<string, ReactNode> = {
   tg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem', opacity: 0.5 }}><path d="M21.5 3.5L2.5 11l6 2.5M21.5 3.5l-4 18-8-7m8 7l-8-7m8 7l-2.5-6m-5.5 1l-4 4"/></svg>,
   email: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem', opacity: 0.5 }}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>,
   ig: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline', verticalAlign: 'middle', marginRight: '0.5rem', opacity: 0.5 }}><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="18" cy="6" r="1"/></svg>,
 };
-
 function getIcon(label: string) {
   if (label.includes('Telegram') || label.includes('TG')) return menuIcons.tg;
   if (label.includes('Email') || label.includes('@')) return menuIcons.email;
   if (label.includes('Instagram') || label.includes('IG')) return menuIcons.ig;
   return null;
 }
-
 export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScreenMenuProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
-
   // Create timeline once
   useEffect(() => {
     const overlay = overlayRef.current;
     const links = linksRef.current;
     if (!overlay || !links) return;
-
     const linkEls = links.querySelectorAll('.menu-link');
-
     const tl = gsap.timeline({ paused: true });
-
     tl.set(overlay, { display: 'flex' });
     tl.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: 'power2.out' });
     tl.fromTo(
@@ -44,19 +37,15 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
       { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out', stagger: 0.08 },
       '-=0.2'
     );
-
     tlRef.current = tl;
-
     return () => {
       tl.kill();
     };
   }, []);
-
   // Play/reverse based on isOpen
   useEffect(() => {
     const tl = tlRef.current;
     if (!tl) return;
-
     if (isOpen) {
       tl.timeScale(1);
       tl.play();
@@ -65,14 +54,11 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
       tl.reverse();
     }
   }, [isOpen]);
-
   const handleLinkClick = (target: string) => {
     onNavigate(target);
     onClose();
   };
-
   if (navigationConfig.fullscreenMenuLinks.length === 0) return null;
-
   return (
     <div
       ref={overlayRef}
@@ -99,7 +85,6 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
           {navigationConfig.closeLabel}
         </button>
       )}
-
       <div className="flex items-center justify-center w-full h-full px-4 md:px-8 overflow-y-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-[1200px] w-full">
           <div ref={linksRef} className="flex flex-col gap-1 md:gap-2">
@@ -135,7 +120,6 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
               </button>
             ))}
           </div>
-
           {navigationConfig.menuSideInfo.length > 0 && (
             <div className="flex flex-col gap-4 md:gap-8 justify-center mt-4 md:mt-0">
               {navigationConfig.menuSideInfo.map((info, i) => (
