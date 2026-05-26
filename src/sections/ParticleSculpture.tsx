@@ -259,7 +259,7 @@ export default function ParticleSculpture() {
       style={{
         background: '#f5f4f0',
         minHeight: '100vh',
-        padding: '12rem var(--page-padding)',
+        padding: 'clamp(4rem, 10vw, 12rem) var(--page-padding)',
       }}
     >
       <div

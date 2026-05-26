@@ -50,7 +50,7 @@ export default function WavesVideo() {
       
       style={{
         background: '#0a0a0b',
-        padding: '12rem var(--page-padding) 8rem',
+        padding: 'clamp(4rem, 10vw, 12rem) var(--page-padding) clamp(3rem, 6vw, 8rem)',
       }}
     >
       {wavesVideoConfig.sectionLabel && (

@@ -62,7 +62,7 @@ export default function ImageGallery() {
         ref={sectionRef}
         style={{
           background: '#0a0a0b',
-          padding: '12rem var(--page-padding)',
+          padding: 'clamp(4rem, 10vw, 12rem) var(--page-padding)',
         }}
       >
         <div className="text-center" style={{ marginBottom: '4rem' }}>
