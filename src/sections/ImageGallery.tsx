@@ -87,12 +87,10 @@ export default function ImageGallery() {
         </div>
 
         <div
-          className="mx-auto"
+          className="mx-auto grid grid-cols-2 md:grid-cols-3"
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '2vw',
-            width: '85vw',
+            gap: '3vw',
+            width: '90vw',
             maxWidth: '1400px',
           }}
         >
@@ -130,10 +128,11 @@ export default function ImageGallery() {
               <div
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '12px',
-                  color: '#999',
+                  fontSize: 'clamp(13px, 3vw, 14px)',
+                  color: '#b0b2b5',
                   marginTop: '0.75rem',
                   letterSpacing: '0.02em',
+                  fontWeight: 400,
                 }}
               >
                 {item.caption}
