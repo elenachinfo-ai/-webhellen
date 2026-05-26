@@ -235,6 +235,29 @@ export const galleryConfig: GalleryConfig = {
   lightboxCloseHint: "Нажмите Esc или кликните вне изображения, чтобы закрыть",
 }
 
+
+// --- Contact Form ---
+
+export interface ContactConfig {
+  sectionLabel: string
+  title: string
+  subtitle: string
+  namePlaceholder: string
+  phonePlaceholder: string
+  buttonText: string
+  successMessage: string
+}
+
+export const contactConfig: ContactConfig = {
+  sectionLabel: '06 / СВЯЗЬ',
+  title: "Запишитесь на консультацию",
+  subtitle: 'Оставьте контакты — я свяжусь с вами в течение часа',
+  namePlaceholder: 'Ваше имя',
+  phonePlaceholder: '+7 (___) ___-__-__',
+  buttonText: 'ЗАПИСАТЬСЯ',
+  successMessage: 'Спасибо! Я свяжусь с вами в ближайшее время',
+}
+
 // --- Footer ---
 
 export interface FooterLinkColumn {

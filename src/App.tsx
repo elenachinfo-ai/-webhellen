@@ -7,6 +7,7 @@ import ParticleSculpture from './sections/ParticleSculpture';
 import LighthouseVideo from './sections/LighthouseVideo';
 import ImageGallery from './sections/ImageGallery';
 import WavesVideo from './sections/WavesVideo';
+import ContactForm from "./sections/ContactForm"
 import FooterTicker from './sections/FooterTicker';
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <LighthouseVideo />
         <ImageGallery />
         <WavesVideo />
+        <ContactForm />
       </main>
 
       <FooterTicker />
