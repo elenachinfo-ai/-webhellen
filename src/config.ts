@@ -258,6 +258,38 @@ export const contactConfig: ContactConfig = {
   successMessage: 'Спасибо! Я свяжусь с вами в ближайшее время',
 }
 
+
+// --- Services Pricing ---
+
+export interface ServiceItem {
+  name: string
+  price: string
+}
+
+export interface ServicesConfig {
+  sectionLabel: string
+  title: string
+  subtitle: string
+  items: ServiceItem[]
+  footnote: string
+}
+
+export const servicesConfig: ServicesConfig = {
+  sectionLabel: '07 / УСЛУГИ',
+  title: 'Прайс-лист',
+  subtitle: 'Индивидуальный подход к каждому проекту',
+  items: [
+    { name: 'Разбор гардероба', price: '25 000 ₽' },
+    { name: 'Шопинг-сопровождение', price: '50 000 ₽' },
+    { name: 'Создание образа', price: '25 000 ₽' },
+    { name: 'Капсульный гардероб', price: '75 000 ₽' },
+    { name: 'Стилизация фотосессии', price: '45 000 ₽' },
+  ],
+  footnote: '* Стоимость зависит от объёма работ и уточняется на консультации',
+}
+
+// --- Footer ---
+
 // --- Footer ---
 
 export interface FooterLinkColumn {
@@ -272,28 +304,7 @@ export interface FooterConfig {
 }
 
 export const footerConfig: FooterConfig = {
-  linkColumns: [
-    {
-      heading: "УСЛУГИ",
-      links: [
-        "Разбор гардероба — от 25 000 ₽",
-        "Шопинг-сопровождение — от 50 000 ₽",
-        "Создание образа — от 25 000 ₽",
-        "Капсульный гардероб — от 75 000 ₽",
-        "Стилизация фотосессии — от 45 000 ₽",
-      ],
-    },
-    {
-      heading: "КОНТАКТЫ",
-      links: [
-        "Telegram: @hellen_stylist",
-        "WhatsApp: +7 (916) 555-44-33",
-        "Email: hello@hellen-stylist.ru",
-        "Instagram: @hellen_stylist",
-        "Москва, ЦАО",
-      ],
-    },
-  ],
+  linkColumns: [],
   tickerWords: [
     "СТИЛЬ",
     "ОБРАЗ",

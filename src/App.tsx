@@ -8,6 +8,7 @@ import LighthouseVideo from './sections/LighthouseVideo';
 import ImageGallery from './sections/ImageGallery';
 import WavesVideo from './sections/WavesVideo';
 import ContactForm from "./sections/ContactForm"
+import ServicesPricing from "./sections/ServicesPricing"
 import FooterTicker from './sections/FooterTicker';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         <ContactForm />
       </main>
 
+      <ServicesPricing />
       <FooterTicker />
     </div>
   );

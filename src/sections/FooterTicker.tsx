@@ -187,7 +187,7 @@ export default function FooterTicker() {
     };
   }, [startLineCycle, buildLineHTML]);
 
-  if (footerConfig.linkColumns.length === 0 && footerConfig.tickerWords.length === 0 && !footerConfig.copyright) {
+  if (footerConfig.tickerWords.length === 0 && !footerConfig.copyright) {
     return null;
   }
 
@@ -196,54 +196,37 @@ export default function FooterTicker() {
       id="footer"
       style={{
         background: '#0a0a0b',
-        padding: '10rem var(--page-padding) 4rem',
+        padding: '8rem var(--page-padding) 4rem',
       }}
     >
-      {/* Top half — Site links */}
-      {footerConfig.linkColumns.length > 0 && (
-        <div
-          className="mx-auto grid grid-cols-2 gap-16"
-          style={{ maxWidth: '1400px' }}
-        >
-          {footerConfig.linkColumns.map((col, colIdx) => (
-            <div key={colIdx}>
-              {col.heading && (
-                <div
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '11px',
-                    fontWeight: 400,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.15em',
-                    color: '#7a7c7f',
-                    marginBottom: '1rem',
-                  }}
-                >
-                  {col.heading}
-                </div>
-              )}
-              {col.links.map((link) => (
-                <div key={link}>
-                  <a
-                    href="#hero"
-                    onClick={(e) => e.preventDefault()}
-                    className="block no-underline transition-colors duration-300 hover:text-white"
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontWeight: 300,
-                      fontSize: '14px',
-                      color: '#b0b2b5',
-                      lineHeight: 2.2,
-                    }}
-                  >
-                    {link}
-                  </a>
-                </div>
-              ))}
-            </div>
-          ))}
+      {/* Contacts */}
+      <div className="mx-auto text-center" style={{ maxWidth: 500, marginBottom: '5rem' }}>
+        <div style={{ fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.15em', color: '#7a7c7f', marginBottom: '2rem' }}>
+          КОНТАКТЫ
         </div>
-      )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {[
+            { label: 'Telegram', value: '@hellen_stylist', href: 'https://t.me/hellen_stylist' },
+            { label: 'WhatsApp', value: '+7 (916) 555-44-33', href: 'https://wa.me/79165554433' },
+            { label: 'Email', value: 'hello@hellen-stylist.ru', href: 'mailto:hello@hellen-stylist.ru' },
+            { label: 'Instagram', value: '@hellen_stylist', href: 'https://instagram.com/hellen_stylist' },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline transition-colors duration-300 hover:text-white"
+              style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 14, color: '#b0b2b5', lineHeight: 2 }}
+            >
+              {item.label}: {item.value}
+            </a>
+          ))}
+          <div style={{ fontFamily: 'var(--font-sans)', fontWeight: 300, fontSize: 14, color: '#b0b2b5', lineHeight: 2, marginTop: '0.5rem' }}>
+            Москва, ЦАО
+          </div>
+        </div>
+      </div>
 
       {/* Horizontal rule */}
       <div
