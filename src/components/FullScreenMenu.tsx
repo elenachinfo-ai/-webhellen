@@ -13,16 +13,13 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
   const linksRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
+  // Create timeline once
   useEffect(() => {
     const overlay = overlayRef.current;
     const links = linksRef.current;
     if (!overlay || !links) return;
 
     const linkEls = links.querySelectorAll('.menu-link');
-
-    if (tlRef.current) {
-      tlRef.current.kill();
-    }
 
     const tl = gsap.timeline({ paused: true });
 
@@ -37,15 +34,23 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
 
     tlRef.current = tl;
 
-    if (isOpen) {
-      tl.play();
-    } else {
-      tl.reverse();
-    }
-
     return () => {
       tl.kill();
     };
+  }, []);
+
+  // Play/reverse based on isOpen
+  useEffect(() => {
+    const tl = tlRef.current;
+    if (!tl) return;
+
+    if (isOpen) {
+      tl.timeScale(1);
+      tl.play();
+    } else {
+      tl.timeScale(2);
+      tl.reverse();
+    }
   }, [isOpen]);
 
   const handleLinkClick = (target: string) => {
@@ -64,7 +69,7 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
       {navigationConfig.closeLabel && (
         <button
           onClick={onClose}
-          className="absolute top-6 right-8 cursor-pointer bg-transparent"
+          className="absolute top-6 right-4 md:right-8 cursor-pointer bg-transparent z-10"
           style={{
             fontFamily: 'var(--font-sans)',
             fontSize: '11px',
@@ -75,41 +80,34 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
             border: '1px solid rgba(255,255,255,0.3)',
             borderRadius: '20px',
             padding: '8px 20px',
-            transition: 'border-color 0.3s ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.borderColor = '#f25b29';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(255,255,255,0.3)';
+            WebkitTapHighlightColor: 'transparent',
           }}
         >
           {navigationConfig.closeLabel}
         </button>
       )}
 
-      <div className="flex items-center justify-center w-full h-full px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-[1200px] w-full">
-          <div ref={linksRef} className="flex flex-col gap-2">
+      <div className="flex items-center justify-center w-full h-full px-4 md:px-8 overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 max-w-[1200px] w-full">
+          <div ref={linksRef} className="flex flex-col gap-1 md:gap-2">
             {navigationConfig.fullscreenMenuLinks.map((link) => (
               <button
                 key={link.target}
-                className="menu-link text-left cursor-pointer bg-transparent group"
+                className="menu-link text-left cursor-pointer bg-transparent group py-2"
                 onClick={() => handleLinkClick(link.target)}
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+                  fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
                   color: '#ffffff',
-                  lineHeight: 1.8,
+                  lineHeight: 1.5,
                   border: 'none',
-                  position: 'relative',
-                  display: 'inline-block',
+                  WebkitTapHighlightColor: 'transparent',
                 }}
               >
-                <span className="relative">
+                <span className="relative inline-block">
                   {link.label}
                   <span
-                    className="absolute bottom-1 left-0 h-[1px] w-0 group-hover:w-full transition-all duration-300 ease-out"
+                    className="absolute bottom-0 left-0 h-[1px] w-0 group-hover:w-full transition-all duration-300 ease-out"
                     style={{ background: '#f25b29' }}
                   />
                 </span>
@@ -118,13 +116,13 @@ export default function FullScreenMenu({ isOpen, onClose, onNavigate }: FullScre
           </div>
 
           {navigationConfig.menuSideInfo.length > 0 && (
-            <div className="flex flex-col gap-8 justify-center">
+            <div className="flex flex-col gap-4 md:gap-8 justify-center mt-4 md:mt-0">
               {navigationConfig.menuSideInfo.map((info, i) => (
                 <div
                   key={i}
                   style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '13px',
+                    fontSize: '12px',
                     letterSpacing: '0.08em',
                     lineHeight: 1.4,
                     color: '#7a7c7f',
