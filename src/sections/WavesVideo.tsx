@@ -64,7 +64,7 @@ export default function WavesVideo() {
         className="mx-auto relative w-full md:w-[90vw] md:aspect-video"
         style={{
           maxWidth: '1600px',
-          maxHeight: '100vh',
+          minHeight: "70vh", maxHeight: "100vh",
           overflow: 'hidden',
           opacity: 0,
         }}
