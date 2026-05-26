@@ -47,10 +47,10 @@ export default function WavesVideo() {
     <section
       id="waves-video"
       ref={sectionRef}
-      className="px-0 md:px-[var(--page-padding)]"
+      
       style={{
         background: '#0a0a0b',
-        padding: '4rem 0 8rem',
+        padding: '12rem var(--page-padding) 8rem',
       }}
     >
       {wavesVideoConfig.sectionLabel && (
