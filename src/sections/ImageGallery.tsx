@@ -97,7 +97,7 @@ export default function ImageGallery() {
           {galleryConfig.items.map((item, i) => (
             <div
               key={i}
-              className="gallery-card"
+              className="gallery-card group"
               style={{ opacity: 0, cursor: 'pointer' }}
               onClick={() => setSelectedIndex(i)}
             >
@@ -105,7 +105,6 @@ export default function ImageGallery() {
                 style={{
                   width: '100%',
                   aspectRatio: '3/4',
-                  borderRadius: '0px',
                   overflow: 'hidden',
                   position: 'relative',
                 }}
@@ -114,28 +113,88 @@ export default function ImageGallery() {
                   src={item.src}
                   alt={item.caption}
                   loading="lazy"
-                  className="transition-transform duration-500"
+                  className="transition-transform duration-700 ease-out group-hover:scale-105"
                   style={{
                     objectFit: 'cover',
                     width: '100%',
                     height: '100%',
                     display: 'block',
                   }}
-                  onMouseEnter={(e) => { (e.target as HTMLElement).style.transform = 'scale(1.03)'; }}
-                  onMouseLeave={(e) => { (e.target as HTMLElement).style.transform = 'scale(1)'; }}
                 />
+                {/* Hover overlay with icon */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 ease-out"
+                  style={{
+                    background: 'rgba(10, 10, 11, 0.5)',
+                    backdropFilter: 'blur(2px)',
+                  }}
+                >
+                  <div
+                    className="flex flex-col items-center gap-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-400 ease-out"
+                  >
+                    {/* Magnifying glass icon */}
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="opacity-90"
+                    >
+                      <circle cx="11" cy="11" r="7" />
+                      <path d="M21 21l-4.35-4.35" />
+                      <path d="M11 8v6" className="group-hover:scale-110 transition-transform" />
+                      <path d="M8 11h6" className="group-hover:scale-110 transition-transform" />
+                    </svg>
+                    <span
+                      style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '10px',
+                        fontWeight: 400,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.2em',
+                        color: '#ffffff',
+                        opacity: 0.8,
+                      }}
+                    >
+                      Смотреть
+                    </span>
+                  </div>
+                </div>
               </div>
               <div
+                className="flex items-center gap-2"
                 style={{
                   fontFamily: 'var(--font-sans)',
                   fontSize: 'clamp(13px, 3vw, 14px)',
                   color: '#b0b2b5',
-                  marginTop: '0.75rem',
+                  marginTop: '0.85rem',
                   letterSpacing: '0.02em',
                   fontWeight: 400,
+                  transition: 'color 0.3s ease',
                 }}
               >
-                {item.caption}
+                <span className="group-hover:text-white transition-colors duration-300">
+                  {item.caption}
+                </span>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out"
+                  style={{ color: '#f25b29', flexShrink: 0 }}
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5l7 7-7 7" />
+                </svg>
               </div>
             </div>
           ))}
