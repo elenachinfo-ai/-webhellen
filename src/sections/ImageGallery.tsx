@@ -121,80 +121,51 @@ export default function ImageGallery() {
                     display: 'block',
                   }}
                 />
-                {/* Hover overlay with icon */}
+                {/* Pulsing arrow in bottom-right corner */}
                 <div
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-400 ease-out"
                   style={{
-                    background: 'rgba(10, 10, 11, 0.5)',
-                    backdropFilter: 'blur(2px)',
+                    position: 'absolute',
+                    bottom: '12px',
+                    right: '12px',
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '50%',
+                    background: 'rgba(242, 91, 41, 0.85)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: 0.85,
+                    animation: 'pulseArrow 2s ease-in-out infinite',
                   }}
                 >
-                  <div
-                    className="flex flex-col items-center gap-3 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-400 ease-out"
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    {/* Magnifying glass icon */}
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="white"
-                      strokeWidth="1.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="opacity-90"
-                    >
-                      <circle cx="11" cy="11" r="7" />
-                      <path d="M21 21l-4.35-4.35" />
-                      <path d="M11 8v6" className="group-hover:scale-110 transition-transform" />
-                      <path d="M8 11h6" className="group-hover:scale-110 transition-transform" />
-                    </svg>
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-sans)',
-                        fontSize: '10px',
-                        fontWeight: 400,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.2em',
-                        color: '#ffffff',
-                        opacity: 0.8,
-                      }}
-                    >
-                      Смотреть
-                    </span>
-                  </div>
+                    <path d="M7 17l9.2-9.2" />
+                    <path d="M17 7H7" />
+                    <path d="M17 7v10" />
+                  </svg>
                 </div>
               </div>
               <div
-                className="flex items-center gap-2"
+                className="flex items-center gap-2 group-hover:text-white transition-colors duration-300"
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: 'clamp(13px, 3vw, 14px)',
-                  color: '#b0b2b5',
+                  fontSize: 'clamp(14px, 2.5vw, 16px)',
+                  color: '#c0c0c4',
                   marginTop: '0.85rem',
                   letterSpacing: '0.02em',
                   fontWeight: 400,
-                  transition: 'color 0.3s ease',
                 }}
               >
-                <span className="group-hover:text-white transition-colors duration-300">
-                  {item.caption}
-                </span>
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out"
-                  style={{ color: '#f25b29', flexShrink: 0 }}
-                >
-                  <path d="M5 12h14" />
-                  <path d="M12 5l7 7-7 7" />
-                </svg>
+                {item.caption}
               </div>
             </div>
           ))}
@@ -316,6 +287,10 @@ export default function ImageGallery() {
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
+        }
+        @keyframes pulseArrow {
+          0%, 100% { transform: scale(1); opacity: 0.85; }
+          50% { transform: scale(1.12); opacity: 1; }
         }
       `}</style>
     </>
