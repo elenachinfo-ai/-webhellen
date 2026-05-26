@@ -340,36 +340,60 @@
    ============================ */
 
 @media (max-width: 768px) {
+  /* Scale down the 3D room for mobile screens */
   .archive-container {
-    perspective: 1000px;
+    perspective: 1600px;
+  }
+
+  .room__side--back {
+    transform: translate3d(0, 0, -2500px) rotate3d(1, 0, 0, 0.1deg);
+  }
+
+  .room__side--right {
+    width: 2500px;
+    transform: rotate3d(0, 1, 0, -90.03deg);
+  }
+
+  .room__side--left {
+    width: 2500px;
+    transform: rotate3d(0, 1, 0, 90deg);
+  }
+
+  .room__side--top {
+    height: 2500px;
+    transform: rotate3d(1, 0, 0, -90deg) translate3d(0, 2500px, 0);
+  }
+
+  .room__side--bottom {
+    height: 2500px;
+    transform: rotate3d(1, 0, 0, 90deg) translate3d(0, -2500px, 0);
   }
 
   .room__side img {
-    max-width: 70%;
-    max-height: 55%;
+    max-width: 65%;
+    max-height: 50%;
   }
 
   .room__side--back img {
-    margin: 0 2%;
+    margin: 0 3%;
   }
 
   .room__side--left img {
-    margin: 0 0 0 8%;
+    margin: 0 0 0 12%;
   }
 
   .room__side--right img {
-    margin: 0 8% 0 0;
+    margin: 0 12% 0 0;
   }
 
   .archive-title {
-    font-size: clamp(2.5rem, 11vw, 4rem);
+    font-size: clamp(2.5rem, 10vw, 3.5rem);
     padding: 0 1rem;
-    line-height: 1.05;
   }
 
   .archive-subtitle {
     font-size: 14px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
     margin-top: 0.5rem;
   }
 
@@ -377,13 +401,10 @@
     font-size: 13px;
     padding: 0 1rem;
     line-height: 2;
-    letter-spacing: 0.1em;
   }
 
   .archive-content {
-    padding-bottom: 6vh;
-    justify-content: center;
-    gap: 0.5rem;
+    padding-bottom: 10vh;
   }
 
   .nav-arrow {
