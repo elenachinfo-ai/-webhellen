@@ -135,7 +135,7 @@ export const particleConfig: ParticleConfig = {
   slides: [
     {
       number: "01",
-      subtitle: "Философия стиля",
+      subtitle: "Философия стиля", total: "от 50 000 ₽",
       text: "Я верю, что каждый человек уже обладает уникальным стилем — он просто ждёт, когда его раскроют. Моя работа заключается не в том, чтобы навязать модные тренды, а в том, чтобы найти гармонию между вашим внутренним миром и внешним образом.",
       takeaway: "Стиль — это не маска, а продолжение вашей личности",
     },
@@ -301,6 +301,7 @@ export interface ServiceCard {
   tag: string
   description: string
   items: ServiceSubItem[]
+  total: string
   highlight?: string
 }
 

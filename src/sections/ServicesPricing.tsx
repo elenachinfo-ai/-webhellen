@@ -118,6 +118,68 @@ export default function ServicesPricing() {
                   </div>
                 ))}
               </div>
+
+              {/* Total + CTA */}
+              <div style={{
+                borderTop: '1px solid rgba(255,255,255,0.08)',
+                marginTop: '1.25rem',
+                paddingTop: '1.25rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '0.75rem',
+              }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'baseline',
+                }}>
+                  <span style={{
+                    fontFamily: 'var(--font-sans)', fontSize: 11, fontWeight: 400,
+                    color: '#7a7c7f', textTransform: 'uppercase', letterSpacing: '0.1em',
+                  }}>
+                    Итого
+                  </span>
+                  <span style={{
+                    fontFamily: 'var(--font-mono)', fontSize: 'clamp(16px, 2.5vw, 20px)',
+                    fontWeight: 500, color: '#ffffff', letterSpacing: '0.04em',
+                  }}>
+                    {card.total}
+                  </span>
+                </div>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    textAlign: 'center',
+                    background: 'transparent',
+                    border: '1px solid rgba(242,91,41,0.4)',
+                    color: '#f25b29',
+                    padding: '0.7rem 1.5rem',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: 'clamp(10px, 1.3vw, 11px)',
+                    fontWeight: 400,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.15em',
+                    textDecoration: 'none',
+                    transition: 'all 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = '#f25b29';
+                    e.currentTarget.style.color = '#fff';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = '#f25b29';
+                  }}
+                >
+                  Связаться &rarr;
+                </a>
+              </div>
             </div>
           ))}
         </div>
