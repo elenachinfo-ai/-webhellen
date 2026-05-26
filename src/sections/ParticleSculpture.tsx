@@ -274,7 +274,7 @@ export default function ParticleSculpture() {
 
     prev.addEventListener('click', () => showSlide((current - 1 + total) % total));
     next.addEventListener('click', () => showSlide((current + 1) % total));
-    dots.forEach((dot) => dot.addEventListener('click', () => showSlide(i)));
+    dots.forEach((dot) => dot.addEventListener('click', () => showSlide(0)));
 
     return () => {
       prev.removeEventListener('click', () => {});
@@ -328,7 +328,7 @@ export default function ParticleSculpture() {
           {/* Slides */}
           {particleConfig.slides.map((slide, i) => (
             <div
-              key={idx}
+              key={i}
               className="slide-card"
               style={{
                 display: i === 0 ? 'block' : 'none',
